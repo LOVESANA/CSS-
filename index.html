@@ -5,210 +5,11 @@
     <meta charset="utf-8">
     <title>CSS字幕ツール</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            border: 0;
-            padding: 0;
-        }
-
-        body {
-            height: 100vh;
-            width: 100vw;
-            background: linear-gradient(to top, #2e6a87, #679d9f);
-        }
-
-        [type="checkbox"],
-        [type="radio"] {
-            width: 0;
-            height: 0;
-            transform: scale(0);
-            position: fixed;
-        }
-
-        label {
-            cursor: pointer;
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            width: 100vw;
-            height: 10vh;
-        }
-
-        nav > ul {
-            display: table;
-        }
-
-        nav > ul > li {
-            width: 20vw;
-            height: 10vh;
-            line-height: 10vh;
-            display: table-cell;
-            list-style: none;
-            text-align: center;
-            font-size: 2vw;
-            transition: color .1s linear;
-        }
-            nav > ul > li:hover { color: #DC143C; }
-
-        nav > ul > li > label { display: block; }
-            nav >ul > li > label::before {
-                display: inline-block;
-                margin-right: .5em;
-                font: normal normal normal 14px/1 FontAwesome;
-                font-size: inherit;
-                text-rendering: auto;
-            }
-            nav>ul>li:nth-child(1)>label::before { content: "\f031"; }
-            nav>ul>li:nth-child(2)>label::before { content: "\f083"; }
-            nav>ul>li:nth-child(3)>label::before { content: "\f021"; }
-
-        #target_area {
-            width: 80vw;
-            margin: 20vh auto 0;
-            outline: rgba(200, 200, 255, .3) .1vw solid;
-            background: #E0E0E0;
-            background-image: linear-gradient(45deg, #9E9E9E 25%, transparent 0),
-                linear-gradient(45deg, transparent 75%, #9E9E9E 0),
-                linear-gradient(45deg, #9E9E9E 25%, transparent 0),
-                linear-gradient(45deg, transparent 75%, #9E9E9E 0);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px, 15px 15px, 30px 30px;
-        }
-
-        #target {
-            text-align: center;
-            width: 80vw;
-            overflow: scroll;
-            padding: 1vh 0;
-        }
-
-        #target > textarea {
-            resize: none;
-            font-family: "myFont", sans-serif;
-        }
-
-        #css {
-            position: relative;
-        }
-
-        #css--textarea {
-            position: absolute;
-            top: 0;
-            left: 20vw;
-        }
-
-        #css > ul {
-            width: 12vw;
-            position: absolute;
-            top: 8vh;
-            left: 11vw;
-        }
-
-        #css > ul > li {
-            position: relative;
-            list-style: none;
-            height: 5vh;
-            line-height: 5vh;
-            background: #FFF;
-            width: 12vw;
-            transform: scale(.9);
-            font-size: 1vw;
-            transition: margin .2s linear;
-        }
-
-            #css > ul > li > label::before {
-                content: "";
-                position: fixed;
-                top: 0vh;
-                left: -2vw;
-                width: 2vw;
-                height: 5vh;
-            }
-            .str_now::before { background: tomato; }
-            .str_not_now::before { background: #6c6; }
-
-        #css > ul > li:first-child { margin-top: -3vh; }
-            #css > ul > li:hover { margin-left: -1vw; }
-
-        #css > ul > li > label {
-            display: block;
-            margin-left: .5vw;
-        }
-
-        #css--textarea--code {
-            font-family: sans-serif;
-            resize: none;
-            font-size: 1.5vw;
-            margin-top: 5vh;
-            width: 65vw;
-            height: 50vh;
-            padding-left: 5vw;
-            padding-top: 5vh;
-            padding-bottom: 5vh;
-            outline: rgba(200, 200, 255, .3) .1vw solid;
-            line-height: 1.8;
-            overflow-y: scroll;
-        }
-
-        [id$="Alert"] {
-            width: 90vw;
-            height: 90vh;
-            position: fixed;
-            top: 5vh;
-            left: 5vw;
-            border-radius: 2vw;
-            background: #FFF;
-            box-shadow: 0 0 2vw #333;
-        }
-
-        [id$="Alert--comment"] {
-            font-size: 2vw;
-            text-align: center;
-            margin: 30vh auto 10vh;
-            color: #333;
-        }
-
-        [id$="Alert"] > [for$="_flag"] {
-            font-size: 5vw;
-            position: absolute;
-            top: 5vh;
-            right: 5vw;
-            color: #DC143C;
-        }
-
-        #result {
-            display: block;
-            margin: 0 auto;
-        }
-
-        #dropzone {
-            display: block;
-            width: 50vw;
-            height: 30vh;
-            line-height: 30vh;
-            margin: 0 auto;
-            font-size: 2vw;
-            border: #337 .2vw solid;
-            color: #555;
-            text-align: center;
-            border-radius: 2vw;
-        }
-
-        #dropzone.dropover {
-            background-color: #cff;
-            color: #9cc;
-        }
-
-        #save_flag:not(:checked)~#resultAlert,
-        #setting_flag:not(:checked)~#settingAlert { display: none; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <input type="checkbox" id="setting_flag">
+	<input type="checkbox" id="setting_flag">
     <input type="checkbox" id="save_flag">
     <header>
         <nav>
@@ -243,127 +44,25 @@
             <textarea id="css--textarea--code" onkeyup="update(value);">width: 500px;&#13;font-size: 60px;&#13;color: #DC143C;&#13;text-align: center;&#13;background: white;</textarea>
         </div>
     </div>
+
     <div id="resultAlert">
-        <label for="save_flag">×</label>
+        <label for="save_flag" onclick="save_finish()">×</label>
         <div id="resultAlert--comment">以下の画像を生成しました。</div>
         <img src="" id="result">
     </div>
+
     <div id="settingAlert">
-        <label for="setting_flag">×</label>
-        <div id="settingAlert--comment">以下にフォントをドラッグアンドドロップしてください。</div>
-        <div id="dropzone">ここにフォントを入れる。</div>
+    	<label for="setting_flag">×</label>
+    	<div id="settingAlert--comment">以下にフォントをドラッグアンドドロップしてください。</div>
+    	<div id="dropzone">ここにフォントを入れる。</div>
     </div>
+
     <style id="css_edit"></style>
-    <style id="css_edit_font"></style>
+    <style id="css_edit_font">@font-face { font-family: 'myFont'; src: url('TanukiMagic.ttf'); }</style>
+    <style id="css_textShadow"></style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-    <script>
-    const font_target = document.getElementById("dropzone");
-    const css_edit = document.getElementById("css_edit");
-    const css_edit_font = document.getElementById("css_edit_font");
-    const target_str = document.querySelector('#target > textarea');
-    const target_css = document.querySelector('#css--textarea--code');
-    const defaultStr = "CSS字幕ツール";
-    const defaultCss = "width: 500px;\nfont-size: 60px;\ncolor: #DC143C;\ntext-align: center;\nbackground: white;";
-
-    let backup_str = [ "", defaultStr, defaultStr, defaultStr, defaultStr, defaultStr, defaultStr, defaultStr, defaultStr, defaultStr, defaultStr, defaultStr, defaultStr ];
-    let backup_css = [ "", defaultCss, defaultCss, defaultCss, defaultCss, defaultCss, defaultCss, defaultCss, defaultCss, defaultCss, defaultCss, defaultCss, defaultCss ];
-    let backup_label = [ "", "書式1", "書式2", "書式3", "書式4", "書式5", "書式6", "書式7", "書式8", "書式9", "書式10", "書式11", "書式12" ];
-    let now_number = 1;
-    let storage_str = "";
-    let storage_css = "";
-    let storage_label = "";
-
-    window.onload = function() {
-        /* 復元 */
-        backup_str = localStorage.getItem('str').split("|||");
-        backup_css = localStorage.getItem('css').split("|||");
-        backup_label = localStorage.getItem('label').split("|||");
-        for (let i = 1; i < 13; i++) { document.querySelector("#css>ul>li:nth-child(" + i + ")>label").innerHTML = backup_label[i]; }
-        target_str.value = backup_str[1];
-        target_css.value = backup_css[1];
-
-        update();
-    }
-
-    function update() {
-        //cssよみこみ
-        let css_text = target_css.value;
-        //なんか僕の環境だけ勝手に変換されるやつの補正（クソみたいな辞書登録のせいだと思う）
-        css_text = css_text.split('⁻').join('-');
-        css_text = css_text.split('₀').join('0');
-        css_text = css_text.split('₁').join('1');
-        css_text = css_text.split('₂').join('2');
-        css_text = css_text.split('₃').join('3');
-        css_text = css_text.split('₄').join('4');
-        css_text = css_text.split('₅').join('5');
-        css_text = css_text.split('₆').join('6');
-        css_text = css_text.split('₇').join('7');
-        css_text = css_text.split('₈').join('8');
-        css_text = css_text.split('₉').join('9');
-        target_css.value = css_text;
-        //css代入
-        css_edit.innerHTML = "#target > textarea" + "{\n" + css_text + "\n}\n";
-        //canvasの高さをフォントサイズに合わせる
-        target_str.style.height = parseFloat(getComputedStyle(target_str, null).getPropertyValue("font-size").slice(0, -2)) + 20 + "px";
-        target_str.style.lineHeight = parseFloat(getComputedStyle(target_str, null).getPropertyValue("font-size").slice(0, -2)) + 20 + "px";
-        for (let i = 1; i < 13; i++) { backup_label[i] = document.querySelector('#css>ul>li:nth-child(' + i + ')>label').innerHTML; }
-        //バックアップに今の値を代入してストレージにバックアップを保存
-        backup_str[now_number] = target_str.value;
-        backup_css[now_number] = css_text;
-        storage();
-    }
-
-    function reset() {
-        target_css.value = defaultCss;
-        target_str.value = defaultStr;
-        document.querySelector('#css>ul>li:nth-child(' + now_number + ')>label').innerHTML = "書式" + now_number;
-        update();
-    }
-
-    function str_change(new_number) {
-        backup_str[now_number] = target_str.value;
-        backup_css[now_number] = target_css.value;
-        document.querySelector('#css>ul>li:nth-child(' + now_number + ')>label').className = "str_not_now";
-        document.querySelector('#css>ul>li:nth-child(' + new_number + ')>label').className = "str_now";
-        target_str.value = backup_str[new_number];
-        target_css.value = backup_css[new_number];
-        now_number = new_number;
-        update();
-    }
-
-
-    function storage() {
-        storage_str = backup_str.join("|||");
-        storage_css = backup_css.join("|||");
-        storage_label = backup_label.join("|||");
-        localStorage.setItem('str', storage_str);
-        localStorage.setItem('css', storage_css);
-        localStorage.setItem('label', storage_label);
-    }
-
-    function save() {
-        html2canvas(target_str, {
-            onrendered: function(canvas) {
-                var imgData = canvas.toDataURL();
-                document.getElementById("result").src = imgData;
-            }
-        });
-    }
-
-    let DandDreset = function(event) { event.preventDefault(); };
-    let fontChange = function(event) { event.preventDefault();
-
-        const dataTransfer = event.dataTransfer;
-        const font_name = dataTransfer.files[0].name;
-
-        css_edit_font.innerHTML = '@font-face { font-family: "myFont"; src: url("' + font_name + '"); }';
-        document.querySelector("#target > textarea").style.fontFamily = "\"myFont\", sans-serif;";
-        document.getElementById("setting_flag").checked = false;
-    };
-    font_target.ondragover = DandDreset;
-    font_target.ondrop = fontChange;
-
-    </script>
+    <script src="js.js"></script>
 </body>
 
 </html>
